@@ -22,7 +22,7 @@ public class Todo {
     private Boolean isCompleted;
 
     @ManyToOne
-    @JoinColumn(name = "")
+    @JoinColumn(name = "member_id")
     private Member member;
 
 }

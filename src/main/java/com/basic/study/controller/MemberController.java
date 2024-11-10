@@ -1,6 +1,7 @@
 package com.basic.study.controller;
 
 import com.basic.study.dto.MemberReq;
+import com.basic.study.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,15 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("api/members")
 public class MemberController {
+    private final MemberService memberService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody MemberReq memberReq) {
-        return ResponseEntity.ok("로그인됐습니다.");
-
+        return ResponseEntity.ok(memberService.login(memberReq));
     }
 
-    @DeleteMapping()
-    public ResponseEntity<?> delete(@RequestBody MemberReq memberReq) {
-        return ResponseEntity.ok("탈퇴됐습니다.");
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<?> delete(@PathVariable Long memberId) {
+        return memberService.deleteMember(memberId)
+                ? ResponseEntity.ok("탈퇴 성공")
+                : ResponseEntity.ok("탈퇴 실패");
     }
 }
