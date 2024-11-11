@@ -38,7 +38,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
+          port: ${{ secrets.PORT }}
           source: "./build/libs/*.jar"
           target: download
 
@@ -48,7 +48,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
+          port: ${{ secrets.PORT }}
           script_stop: true
           script: |
             sh deploy-basic/deploy.sh
