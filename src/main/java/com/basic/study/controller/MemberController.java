@@ -23,7 +23,6 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMember(memberId));
     }
 
-
     @DeleteMapping("/{memberId}")
     public ResponseEntity<String> delete(@PathVariable Long memberId) {
         return memberService.deleteMember(memberId)
