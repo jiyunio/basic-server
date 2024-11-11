@@ -2,8 +2,10 @@ package com.basic.study.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.el.lang.ELArithmetic;
 
 import java.time.LocalDateTime;
 
@@ -25,5 +27,12 @@ public class Todo {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Builder
+    private Todo(String content, LocalDateTime deadLine, Member member){
+        this.content = content;
+        this.deadLine = deadLine;
+        this.isCompleted = false;
+        this.member = member;
+    }
 }
 
