@@ -9,4 +9,6 @@ import lombok.Getter;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberRes {
+    private Long memberId;
+    private String email;
 }
