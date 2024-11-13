@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,6 +20,9 @@ public class Member {
     private String email;
 
     private String password;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Todo> todoes;
 
     @Builder
     private Member(String email, String password) {
