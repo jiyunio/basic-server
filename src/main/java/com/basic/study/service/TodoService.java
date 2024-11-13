@@ -1,9 +1,9 @@
 package com.basic.study.service;
 
-import com.basic.study.domain.Member;
 import com.basic.study.domain.Todo;
 import com.basic.study.dto.TodoReq;
 import com.basic.study.dto.TodoRes;
+import com.basic.study.dto.TodoUpdateReq;
 import com.basic.study.repository.MemberRepository;
 import com.basic.study.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,9 @@ public class TodoService {
         todoRepository.save(todo);
 
         return TodoRes.builder()
-                .memberId(todoReq.getMemberId())
-                .content(todoReq.getContent())
+                .memberId(todo.getMember().getId())
+                .content(todo.getContent())
+                .deadLine(todo.getDeadLine())
                 .build();
     }
 
@@ -37,14 +38,35 @@ public class TodoService {
         List<Todo> todoList = todoRepository.findAllByMemberId(memberId);
         ArrayList<TodoRes> todoResList = new ArrayList<>();
 
-        for (Todo todo: todoList) {
+        for (Todo todo : todoList) {
             TodoRes todoRes = TodoRes.builder()
                     .memberId(todo.getMember().getId())
                     .content(todo.getContent())
+                    .deadLine(todo.getDeadLine())
+                    .isCompleted(todo.getIsCompleted())
                     .build();
             todoResList.add(todoRes);
         }
         return todoResList;
     }
 
+    public TodoRes updateTodo(Long todoId, TodoUpdateReq todoUpdateReq) {
+        Todo todo = todoRepository.findById(todoId).get();
+        todo.update(todoUpdateReq);
+        todoRepository.save(todo);
+        return TodoRes.builder()
+                .memberId(todo.getMember().getId())
+                .content(todo.getContent())
+                .deadLine(todo.getDeadLine())
+                .isCompleted(todo.getIsCompleted())
+                .build();
+    }
+
+    public boolean deleteTodo(Long todoId) {
+        if (todoRepository.existsById(todoId)) {
+            todoRepository.deleteById(todoId);
+            return true;
+        }
+        return false;
+    }
 }

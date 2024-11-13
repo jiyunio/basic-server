@@ -6,15 +6,14 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class TodoRes {
-    private Long memberId;
+public class TodoUpdateReq {
     private String content;
+
     private LocalDate deadLine;
-    @Builder.Default
-    private Boolean isCompleted = false;
+
+    private Boolean isCompleted;
 }
