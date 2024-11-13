@@ -7,6 +7,8 @@ import com.basic.study.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -25,7 +27,8 @@ public class MemberService {
     }
 
     public MemberRes getMember(Long memberId) {
-        Member member = memberRepository.findById(memberId).get();
+        Member member = memberRepository.findById(memberId).orElseThrow(() -> new NoSuchElementException("해당 회원을 찾을 수 없습니다."));
+
         return MemberRes.builder()
                 .memberId(member.getId())
                 .email(member.getEmail())
