@@ -17,8 +17,8 @@ public class SwaggerConfig {
 
     private Info apiInfo() {
         return new Info()
-                .title("BJJ API") // API의 제목
-                .description("밤점줘 API") // API에 대한 설명
+                .title("basic-server API") // API의 제목
+                .description("베이직 서버 API") // API에 대한 설명
                 .version("1.0.0"); // API의 버전
     }
 }
